@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Dad Joke</title>
+</head>
+<body>
+    <h1>dad-Joke</h1>
+    <div id="joke">loading wait 5s...</div>
+    <button id="getJoke">
+        <div class="inner"></div>
+        <span>click for ny jokes</span>
+    <script src="app.js"></script>
+</body>
+</html>
+<script>
+    const button = document.querySelector("#getJoke");
+const inner = document.querySelector(".inner");
+
+button.addEventListener("mousemove", (e) => {
+  const rect = button.getBoundingClientRect();
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  button.style.setProperty("--mouseX", `${x}px`);
+  button.style.setProperty("--mouseY", `${y}px`);
+});
+
+</script>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", system-ui;
+  height: 100vh;
+  background-color: hsl(240, 4%, 7%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  font-family: system-ui;
+}
+h1 {
+  color: white;
+  font-size: 48px;
+  text-align: center;
+}
+#joke {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  background-color: hsl(0, 0%, 0%);
+  border-radius: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+:root {
+  --primary: 250 66% 61%;
+}
+
+#getJoke{
+  all: unset;
+  font-size: 24px;
+  padding: 14px 52px;
+  background: hsl(0, 0%, 0%);
+  color: white;
+  text-transform: uppercase;
+  position: relative;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+#getJoke > span {
+  font-family: "Roboto";
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 10;
+  transition: 0.25s ease;
+}
+#getJoke:hover > span {
+  color: hsl(var(--primary) / 1);
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+#getJoke::before,
+#getJoke::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background-color: inherit;
+  border-radius: inherit;
+  background-image: conic-gradient(
+    from var(--angle) at 50% 50%,
+    transparent 0%,
+    transparent 33%,
+    hsl(var(--primary)) 50%,
+    transparent 66%,
+    transparent 100%
+  );
+  animation: rotate 2s infinite linear;
+  z-index: -1;
+}
+
+#getJoke::before {
+  filter: blur(15px);
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    100px circle at var(--mouseX) var(--mouseY),
+    hsl(var(--primary) / 0.3),
+    transparent 50%
+  );
+  border-radius: inherit;
+  z-index: 0;
+  opacity: 0;
+}
+#getJoke:hover .inner {
+  opacity: 1;
+}
+
+@keyframes rotate {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+</style>
